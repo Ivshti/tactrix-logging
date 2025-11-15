@@ -311,11 +311,11 @@ databits = 16
 scalingrpn = x,0.05,/
 
 ; alternator set point
-; paramname = ALT_SETP_mV
-; mode = 0x22
-; paramid = 0x032B
-; databits = 16
-; scalingrpn = x,0.05,/
+paramname = ALT_SETP_mV
+mode = 0x22
+paramid = 0x032B
+databits = 16
+scalingrpn = x,0.05,/
 
 paramname = LH_INT_CAM_ACT_deg
 mode = 0x22
