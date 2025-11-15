@@ -386,16 +386,6 @@ databits  = 8
 scalingrpn= x,100,*,255,/      ; % = A * 100 / 255
 
 
-; Liters estimate from the same PID (assumes 72 L tank)
-; reads 26.5 when dash % is 39%
-paramname = FuelLevel_L_72
-mode      = 0x01
-paramid   = 0x2F
-databits  = 8
-scalingrpn= x,0.2823529412,*    ; 72 / 255
-
-
-
 ; -----[ MODE 0x01 PARAMETERS ]-----
 
 
