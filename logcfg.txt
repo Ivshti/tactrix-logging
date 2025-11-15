@@ -1,0 +1,871 @@
+; -----[ channel setup   ]-----
+
+type = obd
+protocolid = 6 ; ISO15765
+; 8000 seems to achieve 400ms
+; 4000 reliably does 200ms
+calcsampinterval = 4000
+calcconstdelay = 0
+mode23txaddrwidth = 4
+mode23txlenwidth = 2
+mode23rxaddrwidth = 0
+; debug=noout
+; sortpids = 1
+
+
+; -----[ USAGE ]-----
+
+; * copy desired parameters to IN USE section from MODE 01 and MODE 22 sections below
+; * make sure to remove preceeding semicolon (and space) to enable for usage
+
+
+; -----[ IN USE ]-----
+
+paramname = RPM
+mode = 0x01
+paramid = 0x0C
+databits = 16
+scalingrpn = x,0.25,*
+
+paramname = SPARKADV
+mode = 0x01
+paramid = 0x0E
+databits = 8
+scalingrpn = x,0.5,*,64,-
+
+paramname = LOAD
+mode = 0x01
+paramid = 0x04
+databits = 8
+scalingrpn = x,0.39215684,*
+
+; throttle position
+paramname = TPS
+mode = 0x22
+paramid = 0x035E
+databits = 16
+scalingrpn = x,0.0015258,*
+
+paramname = THTL_LH_ACT_%
+mode = 0x22
+paramid = 0x031F
+databits = 16
+scalingrpn = x,100,*,65536,/
+
+; manifold pressure
+paramname = MAP
+mode = 0x01
+paramid = 0x0B
+databits = 8
+
+; 0x033a 2 UHEGO RH bank Lamda lamsoni_w phys=(16 * int
+; paramname = WBO2_RH
+; mode = 0x22
+; paramid = 0x033A
+; databits = 16
+; scalingrpn = x,0.00024414,*,
+
+; paramname = WBO2_LH
+; mode = 0x22
+; paramid = 0x033B
+; databits = 16
+; scalingrpn = x,0.00024414,*
+
+paramname = LAMBDA_ACT_1
+mode = 0x01
+paramid = 0x34
+databits = 32
+scalingrpn = x,0.00001525878906,*,0.000030517578,*
+
+paramname = LAMBDA_ACT_2; 
+mode = 0x01
+paramid = 0x38
+databits = 32
+scalingrpn = x,0.00001525878906,*,0.000030517578,*
+
+paramname = ENG_TRQ_Act
+mode = 0x22
+paramid = 0x0348
+databits = 16
+scalingrpn = x,10,/
+
+; paramname = ENG_TRQ_Dmd
+; mode = 0x22
+; paramid = 0x0351
+; databits = 16
+; scalingrpn = x,10,/
+
+paramname = ENG_RUF_ALLCYL
+mode = 0x22
+paramid = 0x0370
+databits = 16
+scalingrpn = x,70.37,/
+
+
+; Fuel stuff copied from below
+; this gets an unrealistic value, and Kaloyan says there's no such sensor
+; paramname = FUEL_RAIL_TEMP_degC
+; mode = 0x22
+; paramid = 0x032F
+; databits = 8
+; scalingrpn = x,0.75,*,48,-
+
+paramname = FUEL_RAIL_PRES_ACT_kPa
+mode = 0x22
+paramid = 0x0330
+databits = 16
+scalingrpn = x,10,/
+
+paramname = FUEL_RAIL_PRES_TGT_kPa
+mode = 0x22
+paramid = 0x0331
+databits = 16
+scalingrpn = x,10,/
+
+
+; Fuel stuff from ChatGPT
+; Relative rail pressure (to manifold) — PID 0x22
+; kPa = 0.079 * (256*A + B)  ≈ (x*79)/1000
+paramname=Fuel_Rail_Rel_kPa
+mode=0x01
+paramid=0x22
+databits=16
+scalingrpn = x,79,*,1000,/
+
+; Simple gauge fuel pressure — PID 0x0A
+; kPa = 3 * A
+paramname=Fuel_Pressure_kPa
+mode=0x01
+paramid=0x0A
+databits=8
+scalingrpn = x,3,*
+
+; end of chatgpt
+
+paramname = MAF
+mode = 0x01
+paramid = 0x10
+databits = 16
+scalingrpn = x,0.0099999998,*
+
+paramname = THTL_RH_ACT_%
+mode = 0x22
+paramid = 0x031E
+databits = 16
+scalingrpn = x,100,*,65536,/
+
+; intake air temp
+paramname = IAT
+mode = 0x01
+paramid = 0x0F
+databits = 8
+scalingrpn = x,40,-
+
+paramname = RUNTM
+mode = 0x01
+paramid = 0x1F
+databits = 16
+
+; doesn't seem to properly work
+; paramname  = Vehicle_Speed
+; mode       = 0x23
+; paramid    = 0xF40D
+; databits   = 8
+; scalingrpn = x
+
+; DID 0x032C | len 2 | Vehicle speed (vfzg_w) [km/h]
+paramname = vehicle_speed_kmh
+mode      = 0x22
+paramid   = 0x032C
+databits  = 16
+scalingrpn= x,128,/              ; phys = (512*int)/65536 = int/128
+; range: 0.00 – 511.99 km/h
+
+paramname = CATEMP11
+mode = 0x01
+paramid = 0x3C
+databits = 16
+scalingrpn = x,0.099999994,*,40,-
+
+paramname = CATEMP21
+mode = 0x01
+paramid = 0x3D
+databits = 16
+scalingrpn = x,0.099999994,*,40,-
+
+
+paramname = EGT_RH_degC
+mode = 0x22
+paramid = 0x0344
+databits = 16
+scalingrpn = x,0.0234375,*,273.15,-
+
+paramname = EGT_LH_degC
+mode = 0x22
+paramid = 0x0345
+databits = 16
+scalingrpn = x,0.0234375,*,273.15,-
+
+; -------- optional helpers --------
+; Manifold absolute pressure in psi (if you want it straight in the log)
+paramname = MAP_psi
+mode      = 0x01
+paramid   = 0x0B
+databits  = 8
+scalingrpn= x,0.1450377377,*  ; kPa -> psi
+
+; Ambient pressure in psi
+paramname = BARO_psi
+mode      = 0x01
+paramid   = 0x33
+databits  = 8
+scalingrpn= x,0.1450377377,*
+
+
+; -------- boost air temperature (post chargecooler) --------
+; Most Bosch ECUs map OBD IAT at the manifold (post-CC on the 720S)
+paramname = IAT_postCC_C
+mode      = 0x01
+paramid   = 0x0F
+databits  = 8
+scalingrpn= x,40,-            ; A - 40  -> °C
+
+; -------- engine coolant temp (main/high-temp circuit) --------
+paramname = ECT_main_C
+mode      = 0x01
+paramid   = 0x05
+databits  = 8
+scalingrpn= x,40,-      
+
+
+
+; -------- boost pressure (via MAP & BARO) --------
+; this is taken from somewhere but this parameter is NOT accurate at all - it reads either 255 or very low values
+; MAP (kPa abs)
+; paramname = MAP_kPa
+; mode      = 0x01
+; paramid   = 0x0B
+; databits  = 8
+; scalingrpn= x                 ; A -> kPa
+
+; nonsense for the mclaren, not reading anything valuable
+; BARO (kPa abs)
+; paramname = BARO_kPa
+; mode      = 0x01
+; paramid   = 0x33
+; databits  = 8
+; scalingrpn= x                 ; A -> kPa
+
+
+paramname = THTL_PDL_%
+mode = 0x22
+paramid = 0x0324
+databits = 16
+scalingrpn = x,80,*,8192,/
+
+paramname = FUEL_CONS_LPH
+mode = 0x22
+paramid = 0x0346
+databits = 16
+scalingrpn = x,140.625,*,65536,/
+
+
+; DID 0x0314 | len 2 | Intake Manifold Temperature reading (tfa1lin_w) [°C]
+; this is same as IAT_postCC_C but nore precise
+paramname = intake_manifold_temp_C
+mode      = 0x22
+paramid   = 0x0314
+databits  = 16
+scalingrpn= x,0.0234375,*,273.15,-   ; phys = 0.0234375*int - 273.15
+; range: -273.15 – 1262.83 °C
+
+; DID 0x031B | len 1 | Engine coolant temp reading (tmot) [°C]
+; this is more precise than ECT_main_C
+paramname = engine_coolant_C
+mode      = 0x22
+paramid   = 0x031B
+databits  = 8
+scalingrpn= x,0.75,*,48,-      ; phys = 0.75*int - 48
+; range: -48.00 – 143.30 °C
+
+
+; DID 0x031A | len 2 | RH-bank Boost Temperature reading (tfa2lin_w) [°C]
+paramname = boost_rh_temp
+mode      = 0x22
+paramid   = 0x031A
+databits  = 16
+scalingrpn= x,0.0234375,*,273.15,-   ; phys = 0.0234375*int - 273.15
+; range: -273.15 – 1262.83 °C
+
+
+paramname = LAMBDA_ACT_1
+mode = 0x01
+paramid = 0x34
+databits = 32
+scalingrpn = x,0.00001525878906,*,0.000030517578,*
+
+paramname = LAMBDA_ACT_2
+mode = 0x01
+paramid = 0x38
+databits = 32
+scalingrpn = x,0.00001525878906,*,0.000030517578,*
+
+
+
+; voltage
+; paramname = voltage_power
+; mode = 0x01
+; paramid = 0x42
+; databits = 16
+; scalingrpn = x,0.00099999993,*
+
+
+paramname = BATT_mV
+mode = 0x22
+paramid = 0x0303
+databits = 16
+scalingrpn = x,0.05,/
+
+; alternator set point
+paramname = ALT_SETP_mV
+mode = 0x22
+paramid = 0x032B
+databits = 16
+scalingrpn = x,0.05,/
+
+
+
+paramname = LH_INT_CAM_ACT_deg
+mode = 0x22
+paramid = 0x0332
+databits = 16
+scalingrpn = x,128,/
+
+paramname = LH_INT_CAM_CMD_deg
+mode = 0x22
+paramid = 0x0336
+databits = 16
+scalingrpn = x,128,/
+
+
+paramname = LH_EXH_CAM_ACT_deg
+mode = 0x22
+paramid = 0x0333
+databits = 16
+scalingrpn = x,128,/
+
+paramname = LH_EXH_CAM_CMD_deg
+mode = 0x22
+paramid = 0x0337
+databits = 16
+scalingrpn = x,128,/
+
+paramname = RH_INT_CAM_ACT_deg
+mode = 0x22
+paramid = 0x0334
+databits = 16
+scalingrpn = x,128,/
+
+paramname = RH_EXH_CAM_ACT_deg
+mode = 0x22
+paramid = 0x0335
+databits = 16
+scalingrpn = x,128,/
+
+paramname = RH_INT_CAM_CMD_deg
+mode = 0x22
+paramid = 0x0338
+databits = 16
+scalingrpn = x,128,/
+
+paramname = RH_EXH_CAM_CMD_deg
+mode = 0x22
+paramid = 0x0339
+databits = 16
+scalingrpn = x,128,/
+
+
+; -----[ MODE 0x01 PARAMETERS ]-----
+
+
+; paramname = FUELSYS
+; mode = 0x01
+; paramid = 0x03
+; databits = 16
+; scalingrpn = x,0.00390625,*
+
+; paramname = LOAD_CALC
+; mode = 0x01
+; paramid = 0x04
+; databits = 8
+; scalingrpn = x,0.39215684,*
+
+; engine coolant temp
+; paramname = ECT
+; mode = 0x01
+; paramid = 0x05
+; databits = 8
+; scalingrpn = x,40,-
+
+; fuel trims
+; paramname = FT_SHORT_1
+; mode = 0x01
+; paramid = 0x06
+; databits = 8
+; scalingrpn = x,0.78125,*,100,-
+; priority = 2
+
+; paramname = FT_LONG_1
+; mode = 0x01
+; paramid = 0x07
+; databits = 8
+; scalingrpn = x,0.78125,*,100,-
+; priority = 2
+
+; paramname = FT_SHORT_2
+; mode = 0x01
+; paramid = 0x08
+; databits = 8
+; scalingrpn = x,0.78125,*,100,-
+; priority = 2
+
+; paramname = FT_LONG_2
+; mode = 0x01
+; paramid = 0x09
+; databits = 8
+; scalingrpn = x,0.78125,*,100,-
+; priority = 2
+
+; paramname = FRP
+; mode = 0x01
+; paramid = 0x0A
+; databits = 8
+; scalingrpn = x,3,*
+
+; paramname = MAP
+; mode = 0x01
+; paramid = 0x0B
+; databits = 8
+
+; paramname = RPM
+; mode = 0x01
+; paramid = 0x0C
+; databits = 16
+; scalingrpn = x,0.25,*
+
+; paramname = VSS
+; mode = 0x01
+; paramid = 0x0D
+; databits = 8
+
+; paramname = SPARKADV
+; mode = 0x01
+; paramid = 0x0E
+; databits = 8
+; scalingrpn = x,0.5,*,64,-
+
+; paramname = IAT
+; mode = 0x01
+; paramid = 0x0F
+; databits = 8
+; scalingrpn = x,40,-
+
+; paramname = MAF
+; mode = 0x01
+; paramid = 0x10
+; databits = 16
+; scalingrpn = x,0.0099999998,*
+
+; paramname = TP1
+; mode = 0x01
+; paramid = 0x11
+; databits = 8
+; scalingrpn = x,0.39215684,*
+
+; paramname = RUNTM
+; mode = 0x01
+; paramid = 0x1F
+; databits = 16
+
+; paramname = MIL_DIST
+; mode = 0x01
+; paramid = 0x21
+; databits = 16
+
+; paramname = BARO
+; mode = 0x01
+; paramid = 0x33
+; databits = 8
+
+; paramname = LAMBDA_ACT_1
+; mode = 0x01
+; paramid = 0x34
+; databits = 32
+; scalingrpn = x,0.00001525878906,*,0.000030517578,*
+
+; paramname = LAMBDA_ACT_2
+; mode = 0x01
+; paramid = 0x38
+; databits = 32
+; scalingrpn = x,0.00001525878906,*,0.000030517578,*
+
+; paramname = CATEMP11
+; mode = 0x01
+; paramid = 0x3C
+; databits = 16
+; scalingrpn = x,0.099999994,*,40,-
+
+; paramname = CATEMP21
+; mode = 0x01
+; paramid = 0x3D
+; databits = 16
+; scalingrpn = x,0.099999994,*,40,-
+
+; paramname = VPWR
+; mode = 0x01
+; paramid = 0x42
+; databits = 16
+; scalingrpn = x,0.00099999993,*
+
+; paramname = LOAD_ABS
+; mode = 0x01
+; paramid = 0x43
+; databits = 16
+; scalingrpn = x,0.0039215684,*
+
+; paramname = LAMBDA_DSD
+; mode = 0x01
+; paramid = 0x44
+; databits = 16
+; scalingrpn = x,0.000030517578,*
+
+; paramname = TP_REL
+; mode = 0x01
+; paramid = 0x45
+; databits = 8
+; scalingrpn = x,0.39215684,*
+
+; paramname = AAT
+; mode = 0x01
+; paramid = 0x46
+; databits = 8
+; scalingrpn = x,40,-
+
+; paramname = TP2
+; mode = 0x01
+; paramid = 0x47
+; databits = 8
+; scalingrpn = x,0.39215684,*
+
+
+
+
+; -----[ MODE 0x22 PARAMETERS ]-----
+
+
+; paramname = PEM1_DC_%
+; mode = 0x22
+; paramid = 0x0300
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = PEM2_DC_%
+; mode = 0x22
+; paramid = 0x0301
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = BATT_mV
+; mode = 0x22
+; paramid = 0x0303
+; databits = 16
+; scalingrpn = x,0.05,/
+
+; paramname = WSTG_RH_%
+; mode = 0x22
+; paramid = 0x030E
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = WSTG_LH_%
+; mode = 0x22
+; paramid = 0x030F
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = BOOST_RH_ACT_hPa
+; mode = 0x22
+; paramid = 0x0316
+; databits = 16
+; scalingrpn = x,20,*,256,/
+
+; paramname = BOOST_LH_ACT_hPa
+; mode = 0x22
+; paramid = 0x0317
+; databits = 16
+; scalingrpn = x,20,*,256,/
+
+; paramname = BOOST_RH_CMD_hPa
+; mode = 0x22
+; paramid = 0x0318
+; databits = 16
+; scalingrpn = x,20,*,256,/
+
+; paramname = BOOST_LH_CMD_hPa
+; mode = 0x22
+; paramid = 0x0319
+; databits = 16
+; scalingrpn = x,20,*,256,/
+
+; paramname = THTL_RH_CMD_%
+; mode = 0x22
+; paramid = 0x031C
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = THTL_LH_CMD_%
+; mode = 0x22
+; paramid = 0x031D
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = THTL_RH_ACT_%
+; mode = 0x22
+; paramid = 0x031E
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = THTL_LH_ACT_%
+; mode = 0x22
+; paramid = 0x031F
+; databits = 16
+; scalingrpn = x,100,*,65536,/
+
+; paramname = THTL_PDL_%
+; mode = 0x22
+; paramid = 0x0324
+; databits = 16
+; scalingrpn = x,80,*,8192,/
+
+; alternator set point
+; paramname = ALT_SETP_mV
+; mode = 0x22
+; paramid = 0x032B
+; databits = 16
+; scalingrpn = x,0.05,/
+
+; paramname = RPM_IDL_TGT
+; mode = 0x22
+; paramid = 0x032D
+; databits = 16
+; scalingrpn = x,2,/
+
+; paramname = FUEL_RAIL_TEMP_degC
+; mode = 0x22
+; paramid = 0x032F
+; databits = 8
+; scalingrpn = x,0.75,*,48,-
+
+; paramname = FUEL_RAIL_PRES_ACT_kPa
+; mode = 0x22
+; paramid = 0x0330
+; databits = 16
+; scalingrpn = x,10,/
+
+; paramname = FUEL_RAIL_PRES_TGT_kPa
+; mode = 0x22
+; paramid = 0x0331
+; databits = 16
+; scalingrpn = x,10,/
+
+; paramname = LH_INT_CAM_ACT_deg
+; mode = 0x22
+; paramid = 0x0332
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = LH_EXH_CAM_ACT_deg
+; mode = 0x22
+; paramid = 0x0333
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = RH_INT_CAM_ACT_deg
+; mode = 0x22
+; paramid = 0x0334
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = RH_EXH_CAM_ACT_deg
+; mode = 0x22
+; paramid = 0x0335
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = LH_INT_CAM_CMD_deg
+; mode = 0x22
+; paramid = 0x0336
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = LH_EXH_CAM_CMD_deg
+; mode = 0x22
+; paramid = 0x0337
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = RH_INT_CAM_CMD_deg
+; mode = 0x22
+; paramid = 0x0338
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = RH_EXH_CAM_CMD_deg
+; mode = 0x22
+; paramid = 0x0339
+; databits = 16
+; scalingrpn = x,128,/
+
+; paramname = WBO2_RH
+; mode = 0x22
+; paramid = 0x033A
+; databits = 16
+; scalingrpn = x,0.00024414,*
+
+; paramname = WBO2_LH
+; mode = 0x22
+; paramid = 0x033B
+; databits = 16
+; scalingrpn = x,0.00024414,*
+
+; paramname = MAF_RH_kgPH
+; mode = 0x22
+; paramid = 0x0342
+; databits = 16
+; scalingrpn = x,0.1,*
+
+; paramname = MAF_LH_kgPH
+; mode = 0x22
+; paramid = 0x0343
+; databits = 16
+; scalingrpn = x,0.1,*
+
+; paramname = EGT_RH_degC
+; mode = 0x22
+; paramid = 0x0344
+; databits = 16
+; scalingrpn = x,0.0234375,*,273.15,-
+
+; paramname = EGT_LH_degC
+; mode = 0x22
+; paramid = 0x0345
+; databits = 16
+; scalingrpn = x,0.0234375,*,273.15,-
+
+; paramname = FUEL_CONS_LPH
+; mode = 0x22
+; paramid = 0x0346
+; databits = 16
+; scalingrpn = x,140.625,*,65536,/
+
+; cruise control status
+; paramname = CR_CNTL_STS
+; mode = 0x22
+; paramid = 0x0349
+; databits = 16
+; scalingrpn = x
+
+; paramname = TPS_%
+; mode = 0x22
+; paramid = 0x035E
+; databits = 16
+; scalingrpn = x,0.0015258,*
+
+; engine roughness
+; paramname = ENG_RUF_ALLCYL
+; mode = 0x22
+; paramid = 0x0370
+; databits = 16
+; scalingrpn = x,70.37,/
+
+; engine roughness reference
+; paramname = ENG_RUF_REF
+; mode = 0x22
+; paramid = 0x0371
+; databits = 16
+; scalingrpn = x,70.37,/
+
+
+; ----- [ MODE 0x23 BLANK ]-----
+
+; paramname = 
+; mode = 0x23
+; paramid = 0xFFFF
+; isfloat = 1
+; databits = 
+; offsetbits = 
+
+
+
+
+; -----[ CALCULATED ]-----
+
+type = calc
+
+; paramname = FT_COMBO_1
+; scalingrpn = FT_SHORT_1,FT_LONG_1,+
+
+
+; ** You must add the component data items to the IN USE section above or the calculations will not work
+
+; Calculated boost in psi guage
+; paramname = BOOST
+; scalingrpn = MAP,997,-,68.94,/
+
+; Calculated AFR (Lambda 1.0 = AFR 14.7 for gas)
+; paramname = AFR
+; scalingrpn = LAMBDA,14.7,*
+
+
+; -----[ TRIGGERS ]-----
+;
+; Note that parameters must be previously defined 
+; before defining triggers using them
+;
+; Triggers allow you to control when logging starts and stops
+; this example sets up triggers such that logging only occurs
+; when the engine is running (RPM > 0)
+;
+; Triggers consist of a condition (a RPN expression using comparison operators)
+; and an action. the RPN comparison operators match those in the C language:
+;
+; > < >= <= == != && ||
+;
+; If the condition evaluates to a non-zero value, that action is taken
+;
+; At present the following actions are available:
+;
+; start - starts logging to a file (if not already doing so)
+; stop - stops logging to a file
+; newfile - starts a new file (only if already logging to a file)
+;
+; IMPORTANT - if you have no triggers defined, logging will start automatically.
+; if you have *any* triggers defined, logging will not start until a start action
+; occurs
+
+; ENGINE START / STOP ACTIVATION
+
+; conditionrpn = RPM,0,>	
+; action = start
+
+; conditionrpn = RPM,0,==
+; action = stop
+
+; CRUISE CONTROL ACTIVATION
+; * must add CR_CNTL_STS to IN USE section above before trigger can be used
+
+; conditionrpn = CR_CNTL_STS,0,>
+; action = start
+
+; conditionrpn = CR_CNTL_STS,0,=
+; action = stop
