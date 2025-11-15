@@ -157,13 +157,6 @@ paramid = 0x10
 databits = 16
 scalingrpn = x,0.0099999998,*
 
-; intake air temp
-paramname = IAT
-mode = 0x01
-paramid = 0x0F
-databits = 8
-scalingrpn = x,40,-
-
 paramname = RUNTM
 mode = 0x01
 paramid = 0x1F
@@ -256,7 +249,7 @@ scalingrpn = x,140.625,*,65536,/
 
 ; DID 0x0314 | len 2 | Intake Manifold Temperature reading (tfa1lin_w) [°C]
 ; this is same as IAT_postCC_C but nore precise
-paramname = IAT_postCC_C
+paramname = Intake_Air_Temp_C
 mode      = 0x22
 paramid   = 0x0314
 databits  = 16
