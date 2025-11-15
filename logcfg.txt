@@ -367,6 +367,41 @@ databits = 16
 scalingrpn = x,128,/
 
 
+paramname = WSTG_RH_%
+mode = 0x22
+paramid = 0x030E
+databits = 16
+scalingrpn = x,100,*,65536,/
+
+paramname = WSTG_LH_%
+mode = 0x22
+paramid = 0x030F
+databits = 16
+scalingrpn = x,100,*,65536,/
+
+paramname = BOOST_RH_ACT_hPa
+mode = 0x22
+paramid = 0x0316
+databits = 16
+scalingrpn = x,20,*,256,/
+
+paramname = BOOST_LH_ACT_hPa
+mode = 0x22
+paramid = 0x0317
+databits = 16
+scalingrpn = x,20,*,256,/
+
+paramname = BOOST_RH_CMD_hPa
+mode = 0x22
+paramid = 0x0318
+databits = 16
+scalingrpn = x,20,*,256,/
+
+paramname = BOOST_LH_CMD_hPa
+mode = 0x22
+paramid = 0x0319
+databits = 16
+
 ; -----[ MODE 0x01 PARAMETERS ]-----
 
 
