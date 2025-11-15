@@ -317,8 +317,6 @@ paramid = 0x032B
 databits = 16
 scalingrpn = x,0.05,/
 
-
-
 paramname = LH_INT_CAM_ACT_deg
 mode = 0x22
 paramid = 0x0332
@@ -343,31 +341,6 @@ mode = 0x22
 paramid = 0x0337
 databits = 16
 scalingrpn = x,128,/
-
-paramname = RH_INT_CAM_ACT_deg
-mode = 0x22
-paramid = 0x0334
-databits = 16
-scalingrpn = x,128,/
-
-paramname = RH_EXH_CAM_ACT_deg
-mode = 0x22
-paramid = 0x0335
-databits = 16
-scalingrpn = x,128,/
-
-paramname = RH_INT_CAM_CMD_deg
-mode = 0x22
-paramid = 0x0338
-databits = 16
-scalingrpn = x,128,/
-
-paramname = RH_EXH_CAM_CMD_deg
-mode = 0x22
-paramid = 0x0339
-databits = 16
-scalingrpn = x,128,/
-
 
 paramname = WSTG_RH_%
 mode = 0x22
