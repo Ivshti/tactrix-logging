@@ -52,6 +52,14 @@ paramid = 0x031F
 databits = 16
 scalingrpn = x,100,*,65536,/
 
+paramname = THTL_RH_ACT_%
+mode = 0x22
+paramid = 0x031E
+databits = 16
+scalingrpn = x,100,*,65536,/
+
+; TODO throttle target %s?
+
 ; 0x033a 2 UHEGO RH bank Lamda lamsoni_w phys=(16 * int
 ; paramname = WBO2_RH
 ; mode = 0x22
@@ -148,12 +156,6 @@ mode = 0x01
 paramid = 0x10
 databits = 16
 scalingrpn = x,0.0099999998,*
-
-paramname = THTL_RH_ACT_%
-mode = 0x22
-paramid = 0x031E
-databits = 16
-scalingrpn = x,100,*,65536,/
 
 ; intake air temp
 paramname = IAT
@@ -401,6 +403,23 @@ paramname = BOOST_LH_CMD_hPa
 mode = 0x22
 paramid = 0x0319
 databits = 16
+
+; SAE J1979 standard
+paramname = FuelLevel_pct
+mode      = 0x01
+paramid   = 0x2F
+databits  = 8
+scalingrpn= x,100,*,255,/      ; % = A * 100 / 255
+
+
+; Liters estimate from the same PID (assumes 72 L tank)
+paramname = FuelLevel_L_72
+mode      = 0x01
+paramid   = 0x2F
+databits  = 8
+scalingrpn= x,0.2823529412,*    ; 72 / 255
+
+
 
 ; -----[ MODE 0x01 PARAMETERS ]-----
 
