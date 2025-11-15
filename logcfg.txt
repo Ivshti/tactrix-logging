@@ -197,17 +197,17 @@ databits = 16
 scalingrpn = x,0.099999994,*,40,-
 
 
-paramname = EGT_RH_degC
-mode = 0x22
-paramid = 0x0344
-databits = 16
-scalingrpn = x,0.0234375,*,273.15,-
+; paramname = EGT_RH_degC
+; mode = 0x22
+; paramid = 0x0344
+; databits = 16
+; scalingrpn = x,0.0234375,*,273.15,-
 
-paramname = EGT_LH_degC
-mode = 0x22
-paramid = 0x0345
-databits = 16
-scalingrpn = x,0.0234375,*,273.15,-
+; paramname = EGT_LH_degC
+; mode = 0x22
+; paramid = 0x0345
+; databits = 16
+; scalingrpn = x,0.0234375,*,273.15,-
 
 ; -------- optional helpers --------
 ; Manifold absolute pressure in psi (if you want it straight in the log)
@@ -256,7 +256,7 @@ scalingrpn = x,140.625,*,65536,/
 
 ; DID 0x0314 | len 2 | Intake Manifold Temperature reading (tfa1lin_w) [°C]
 ; this is same as IAT_postCC_C but nore precise
-paramname = intake_manifold_temp_C
+paramname = IAT_postCC_C
 mode      = 0x22
 paramid   = 0x0314
 databits  = 16
@@ -304,18 +304,18 @@ scalingrpn = x,0.00001525878906,*,0.000030517578,*
 ; scalingrpn = x,0.00099999993,*
 
 
-paramname = BATT_mV
-mode = 0x22
-paramid = 0x0303
-databits = 16
-scalingrpn = x,0.05,/
+; paramname = BATT_mV
+; mode = 0x22
+; paramid = 0x0303
+; databits = 16
+; scalingrpn = x,0.05,/
 
 ; alternator set point
-paramname = ALT_SETP_mV
-mode = 0x22
-paramid = 0x032B
-databits = 16
-scalingrpn = x,0.05,/
+; paramname = ALT_SETP_mV
+; mode = 0x22
+; paramid = 0x032B
+; databits = 16
+; scalingrpn = x,0.05,/
 
 paramname = LH_INT_CAM_ACT_deg
 mode = 0x22
@@ -378,6 +378,7 @@ paramid = 0x0319
 databits = 16
 
 ; SAE J1979 standard
+; this seems to read 36.8 when dash % is 
 paramname = FuelLevel_pct
 mode      = 0x01
 paramid   = 0x2F
@@ -386,6 +387,7 @@ scalingrpn= x,100,*,255,/      ; % = A * 100 / 255
 
 
 ; Liters estimate from the same PID (assumes 72 L tank)
+; reads 26.5 when dash % is 
 paramname = FuelLevel_L_72
 mode      = 0x01
 paramid   = 0x2F
