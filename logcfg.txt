@@ -238,25 +238,6 @@ databits  = 8
 scalingrpn= x,40,-      
 
 
-
-; -------- boost pressure (via MAP & BARO) --------
-; this is taken from somewhere but this parameter is NOT accurate at all - it reads either 255 or very low values
-; MAP (kPa abs)
-; paramname = MAP_kPa
-; mode      = 0x01
-; paramid   = 0x0B
-; databits  = 8
-; scalingrpn= x                 ; A -> kPa
-
-; nonsense for the mclaren, not reading anything valuable
-; BARO (kPa abs)
-; paramname = BARO_kPa
-; mode      = 0x01
-; paramid   = 0x33
-; databits  = 8
-; scalingrpn= x                 ; A -> kPa
-
-
 paramname = THTL_PDL_%
 mode = 0x22
 paramid = 0x0324
