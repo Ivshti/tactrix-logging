@@ -52,12 +52,6 @@ paramid = 0x031F
 databits = 16
 scalingrpn = x,100,*,65536,/
 
-; manifold pressure
-paramname = MAP
-mode = 0x01
-paramid = 0x0B
-databits = 8
-
 ; 0x033a 2 UHEGO RH bank Lamda lamsoni_w phys=(16 * int
 ; paramname = WBO2_RH
 ; mode = 0x22
@@ -100,6 +94,13 @@ mode = 0x22
 paramid = 0x0370
 databits = 16
 scalingrpn = x,70.37,/
+
+paramname = ENG_RUF_REF
+mode = 0x22
+paramid = 0x0371
+databits = 16
+scalingrpn = x,70.37,/
+
 
 
 ; Fuel stuff copied from below
