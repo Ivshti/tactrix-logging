@@ -304,11 +304,11 @@ scalingrpn = x,0.00001525878906,*,0.000030517578,*
 ; scalingrpn = x,0.00099999993,*
 
 
-; paramname = BATT_mV
-; mode = 0x22
-; paramid = 0x0303
-; databits = 16
-; scalingrpn = x,0.05,/
+paramname = BATT_mV
+mode = 0x22
+paramid = 0x0303
+databits = 16
+scalingrpn = x,0.05,/
 
 ; alternator set point
 ; paramname = ALT_SETP_mV
@@ -378,7 +378,7 @@ paramid = 0x0319
 databits = 16
 
 ; SAE J1979 standard
-; this seems to read 36.8 when dash % is 
+; this seems to read 36.8 when dash % is 39%
 paramname = FuelLevel_pct
 mode      = 0x01
 paramid   = 0x2F
@@ -387,7 +387,7 @@ scalingrpn= x,100,*,255,/      ; % = A * 100 / 255
 
 
 ; Liters estimate from the same PID (assumes 72 L tank)
-; reads 26.5 when dash % is 
+; reads 26.5 when dash % is 39%
 paramname = FuelLevel_L_72
 mode      = 0x01
 paramid   = 0x2F
