@@ -46,6 +46,14 @@ paramid = 0x035E
 databits = 16
 scalingrpn = x,0.0015258,*
 
+; this has some conflicts with TPS so it sould be tested
+paramname = THTL_PDL_%
+mode = 0x22
+paramid = 0x0324
+databits = 16
+scalingrpn = x,80,*,8192,/
+
+
 paramname = THTL_LH_ACT_%
 mode = 0x22
 paramid = 0x031F
@@ -232,13 +240,6 @@ mode      = 0x01
 paramid   = 0x05
 databits  = 8
 scalingrpn= x,40,-      
-
-
-paramname = THTL_PDL_%
-mode = 0x22
-paramid = 0x0324
-databits = 16
-scalingrpn = x,80,*,8192,/
 
 paramname = FUEL_CONS_LPH
 mode = 0x22
