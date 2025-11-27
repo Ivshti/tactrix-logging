@@ -1,0 +1,23 @@
+; --- keep your existing header ---
+type = obd
+protocolid = 6          ; ISO15765
+calcsampinterval = 10000
+calcconstdelay = 0
+mode23txaddrwidth = 4
+mode23txlenwidth = 2
+mode23rxaddrwidth = 0
+; debug=noout
+; sortpids = 1
+
+; --- WWH-OBD over UDS: Engine Speed ---
+paramname = RPM
+mode      = 0x22        ; UDS ReadDataByIdentifier
+paramid   = 0xF40C      ; WWH-OBD DID for Engine Speed
+databits  = 16
+scalingrpn= x,4,/       ; ((A*256)+B)/4 -> rpm
+
+; (optional) start/stop only when engine is running
+conditionrpn = RPM,100,>
+action = start
+conditionrpn = RPM,0,==
+action = stop
