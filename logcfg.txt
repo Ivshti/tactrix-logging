@@ -151,24 +151,35 @@ scalingrpn = x,79,*,1000,/
 
 ; Simple gauge fuel pressure — PID 0x0A
 ; kPa = 3 * A
-paramname=Fuel_Pressure_kPa
-mode=0x01
-paramid=0x0A
-databits=8
-scalingrpn = x,3,*
+; not using this one as the DID data is better
+; paramname=Fuel_Pressure_kPa
+; mode=0x01
+; paramid=0x0A
+; databits=8
+; scalingrpn = x,3,*
 
 ; end of chatgpt
 
-paramname = MAF
-mode = 0x01
-paramid = 0x10
-databits = 16
-scalingrpn = x,0.0099999998,*
+; This value is very poor, unusable
+; paramname = MAF
+; mode = 0x01
+; paramid = 0x10
+; databits = 16
+; scalingrpn = x,0.0099999998,*
 
-paramname = RUNTM
-mode = 0x01
-paramid = 0x1F
-databits = 16
+; intake air temp
+; this value is total BS, ranging from -40 to 215 and changing very rapidly, so it's clearly not IAT
+; paramname = IAT
+; mode = 0x01
+; paramid = 0x0F
+; databits = 8
+; scalingrpn = x,40,-
+
+; This is not runtime for the mclaren..it's something else
+; paramname = RUNTM
+; mode = 0x01
+; paramid = 0x1F
+; databits = 16
 
 ; doesn't seem to properly work
 ; paramname  = Vehicle_Speed
@@ -274,20 +285,6 @@ paramid   = 0x031A
 databits  = 16
 scalingrpn= x,0.0234375,*,273.15,-   ; phys = 0.0234375*int - 273.15
 ; range: -273.15 – 1262.83 °C
-
-
-paramname = LAMBDA_ACT_1
-mode = 0x01
-paramid = 0x34
-databits = 32
-scalingrpn = x,0.00001525878906,*,0.000030517578,*
-
-paramname = LAMBDA_ACT_2
-mode = 0x01
-paramid = 0x38
-databits = 32
-scalingrpn = x,0.00001525878906,*,0.000030517578,*
-
 
 
 ; voltage
