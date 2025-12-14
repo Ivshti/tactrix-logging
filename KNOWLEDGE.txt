@@ -4,3 +4,8 @@
 - hard amber plus flashing purple means it's recording
 - if it glows hard yellow (amber) WITHOUT flashing purple in between, it's stuck and not recording: maybe if some parameter is not responding??
 
+
+very general knowledge (ELI5 ish):
+- OBD2, J2534, pass-through, CAN bus, UDS (new cars: OBD-WWH, Ethernet)
+- internal vs external CAN networks and SCUG
+
