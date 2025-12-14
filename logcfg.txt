@@ -47,6 +47,7 @@ databits = 16
 scalingrpn = x,0.0015258,*
 
 ; this has some conflicts with TPS so it sould be tested
+; although it makes sense, one is actual throttle position and the other is pedal
 paramname = THTL_PDL_%
 mode = 0x22
 paramid = 0x0324
