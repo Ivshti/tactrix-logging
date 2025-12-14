@@ -4,7 +4,8 @@ type = obd
 protocolid = 6 ; ISO15765
 ; 8000 seems to achieve 400ms
 ; 4000 reliably does 200ms
-calcsampinterval = 4000
+; trying 2000 for 10hz
+calcsampinterval = 2000
 calcconstdelay = 0
 mode23txaddrwidth = 4
 mode23txlenwidth = 2
