@@ -41,3 +41,24 @@ this is it
 only the first two bytes of the frame are actual data
 
 1/8196
+
+final output:
+
+
+[uds.esc]
+tx_id = 0x730         ; <-- ESC module request arbitration ID
+rx_id = 0x738         ; <-- ESC module response arbitration ID
+
+# UDS ReadDataByIdentifier (0x22), DID = 0x0301
+# ISO-TP single-frame request payload (8 bytes):
+request = 03 22 03 01 00 00 00 00
+
+# Response begins with: 10 xx 62 03 01 ...
+# (multi-frame ISO-TP; requires FlowControl 30 00 00 ...)
+flow_control = 30 00 00 00 00 00 00 00
+
+# -------------------------------------------------------------------
+# Signal: Brake master cylinder pressure
+# -------------------------------------------------------------------
+pressure_expr = ((A<<8)|B) * 0.1220
+units = bar
