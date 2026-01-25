@@ -38,6 +38,6 @@ this means that 0031 = 5.98
 001d = 3.544
 
 this is it
-
+only the first two bytes of the frame are actual data
 
 1/8196
