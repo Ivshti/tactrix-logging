@@ -379,6 +379,12 @@ paramid   = 0x2F
 databits  = 8
 scalingrpn= x,100,*,255,/      ; % = A * 100 / 255
 
+paramname= ExhaustFlap_Pos
+mode=0x22
+paramid=0x043E
+databits=16
+scalingrpn=x,2,/
+
 
 ; -----[ MODE 0x01 PARAMETERS ]-----
 
