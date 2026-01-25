@@ -1,0 +1,43 @@
+1002.395 ff9f00, ffa00, ff9f00, 
+4.116 003100, 003100, 001d00, 002c00
+3.932 001c00, 001d00, 003100, 003100
+the last 00 can be eliminated
+there was one 24004601, but let's assume the 01 is noise - previous one was 003b01 tho - so maybe this 01 means something else as before this we got 24001d00
+
+first bytes after 24 are the value
+
+let's start with the high value 65439 = 1002.395; if we assume 65536 is 1000, it doesn't quite work out but if we just divide naively  we get each unit to be 0.01531 which 
+means...
+
+0031 = 7.35
+001d = 4.35 
+
+001c = 4.2
+
+this is way too close to be a coincidence
+
+
+> 3.519- 3.397
+0.12200000000000033
+> 3.519-1.683
+1.836
+> (3.519-1.683)/0.12200000000000033
+
+looking at this, it seems the step is contained in 0.12200000000000033 - possibly one eith of this 
+
+
+
+theory that 0.015 is the step is false, we are indeed probably dealing with a signed thing; because my math above was wrong by a decimal point
+0031 = 0.735
+001d = 0.435
+
+
+sooo the step seems 0.1222 ish judging by the diag
+
+this means that 0031 = 5.98
+001d = 3.544
+
+this is it
+
+
+1/8196
