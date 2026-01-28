@@ -239,14 +239,6 @@ databits  = 8
 scalingrpn= x,10,*  ; kPa -> hPa
 
 
-; -------- boost air temperature (post chargecooler) --------
-; Most Bosch ECUs map OBD IAT at the manifold (post-CC on the 720S)
-paramname = IAT_postCC_C
-mode      = 0x01
-paramid   = 0x0F
-databits  = 8
-scalingrpn= x,40,-            ; A - 40  -> °C
-
 ; -------- engine coolant temp (main/high-temp circuit) --------
 paramname = ECT_main_C
 mode      = 0x01
@@ -259,6 +251,16 @@ mode = 0x22
 paramid = 0x0346
 databits = 16
 scalingrpn = x,140.625,*,65536,/
+
+
+; -------- boost air temperature (post chargecooler) --------
+; Most Bosch ECUs map OBD IAT at the manifold (post-CC on the 720S)
+; disabled because we have DID 0x0314 which is more precise 
+; paramname = IAT_postCC_C
+; mode      = 0x01
+; paramid   = 0x0F
+; databits  = 8
+; scalingrpn= x,40,-            ; A - 40  -> °C
 
 
 ; DID 0x0314 | len 2 | Intake Manifold Temperature reading (tfa1lin_w) [°C]
