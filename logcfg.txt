@@ -5,7 +5,7 @@ protocolid = 6 ; ISO15765
 ; 8000 seems to achieve 400ms
 ; 4000 reliably does 200ms
 ; trying 2000 for 10hz
-calcsampinterval = 2000
+calcsampinterval = 4000
 calcconstdelay = 0
 mode23txaddrwidth = 4
 mode23txlenwidth = 2
@@ -385,6 +385,11 @@ paramid=0x043E
 databits=16
 scalingrpn=x,2,/
 
+paramname=OBDPID01
+mode=0x01
+paramid=0x01
+databits=8
+scalingrpn=x
 
 ; -----[ MODE 0x01 PARAMETERS ]-----
 
