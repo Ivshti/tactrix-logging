@@ -370,6 +370,7 @@ paramname = BOOST_LH_CMD_hPa
 mode = 0x22
 paramid = 0x0319
 databits = 16
+scalingrpn = x,20,*,256,/
 
 ; SAE J1979 standard
 ; this seems to read 36.8 when dash % is 39%
