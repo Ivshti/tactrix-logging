@@ -225,18 +225,18 @@ scalingrpn = x,0.099999994,*,40,-
 
 ; -------- optional helpers --------
 ; Manifold absolute pressure in psi (if you want it straight in the log)
-paramname = MAP_psi
+paramname = MAP_hPa
 mode      = 0x01
 paramid   = 0x0B
 databits  = 8
-scalingrpn= x,0.1450377377,*  ; kPa -> psi
+scalingrpn= x,10,*  ; kPa -> hPa
 
 ; Ambient pressure in psi
-paramname = BARO_psi
+paramname = barometric_hPa
 mode      = 0x01
 paramid   = 0x33
 databits  = 8
-scalingrpn= x,0.1450377377,*
+scalingrpn= x,10,*  ; kPa -> hPa
 
 
 ; -------- boost air temperature (post chargecooler) --------
