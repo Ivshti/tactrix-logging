@@ -226,13 +226,6 @@ databits  = 8
 scalingrpn= x,10,*  ; kPa -> hPa
 
 
-; -------- engine coolant temp (main/high-temp circuit) --------
-paramname = ECT_main_C
-mode      = 0x01
-paramid   = 0x05
-databits  = 8
-scalingrpn= x,40,-      
-
 paramname = FUEL_CONS_LPH
 mode = 0x22
 paramid = 0x0346
@@ -258,6 +251,14 @@ paramid   = 0x0314
 databits  = 16
 scalingrpn= x,0.0234375,*,273.15,-   ; phys = 0.0234375*int - 273.15
 ; range: -273.15 – 1262.83 °C
+
+; -------- engine coolant temp (main/high-temp circuit) --------
+; disabled because we have engine_coolant_C
+; paramname = ECT_main_C
+; mode      = 0x01
+; paramid   = 0x05
+; databits  = 8
+; scalingrpn= x,40,-
 
 ; DID 0x031B | len 1 | Engine coolant temp reading (tmot) [°C]
 ; this is more precise than ECT_main_C
