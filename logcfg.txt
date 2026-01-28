@@ -198,19 +198,6 @@ databits  = 16
 scalingrpn= x,128,/              ; phys = (512*int)/65536 = int/128
 ; range: 0.00 – 511.99 km/h
 
-paramname = CATEMP11
-mode = 0x01
-paramid = 0x3C
-databits = 16
-scalingrpn = x,0.099999994,*,40,-
-
-paramname = CATEMP21
-mode = 0x01
-paramid = 0x3D
-databits = 16
-scalingrpn = x,0.099999994,*,40,-
-
-
 ; paramname = EGT_RH_degC
 ; mode = 0x22
 ; paramid = 0x0344
