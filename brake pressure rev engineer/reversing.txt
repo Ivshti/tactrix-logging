@@ -1,3 +1,7 @@
+## NOTE: 
+
+## to start: keep in mind there is no dedicated brake pressure sensor. This info comes from the Bosch ESP9 unit which is the ESC AND ABS  
+
 1002.395 ff9f00, ffa00, ff9f00, 
 4.116 003100, 003100, 001d00, 002c00
 3.932 001c00, 001d00, 003100, 003100
