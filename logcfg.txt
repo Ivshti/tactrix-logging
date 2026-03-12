@@ -68,6 +68,17 @@ paramid = 0x031E
 databits = 16
 scalingrpn = x,100,*,65536,/
 
+
+; DID 0x032C | len 2 | Vehicle speed (vfzg_w) [km/h]
+; currently buggy
+paramname = vehicle_speed_kmh
+mode      = 0x22
+paramid   = 0x032C
+databits  = 16
+scalingrpn= x,128,/              ; phys = (512*int)/65536 = int/128
+; range: 0.00 – 511.99 km/h
+
+
 ; TODO throttle target %s?
 
 ; 0x033a 2 UHEGO RH bank Lamda lamsoni_w phys=(16 * int
@@ -107,17 +118,17 @@ scalingrpn = x,10,/
 ; databits = 16
 ; scalingrpn = x,10,/
 
-paramname = ENG_RUF_ALLCYL
-mode = 0x22
-paramid = 0x0370
-databits = 16
-scalingrpn = x,70.37,/
+; paramname = ENG_RUF_ALLCYL
+; mode = 0x22
+; paramid = 0x0370
+; databits = 16
+; scalingrpn = x,70.37,/
 
-paramname = ENG_RUF_REF
-mode = 0x22
-paramid = 0x0371
-databits = 16
-scalingrpn = x,70.37,/
+; paramname = ENG_RUF_REF
+; mode = 0x22
+; paramid = 0x0371
+; databits = 16
+; scalingrpn = x,70.37,/
 
 
 
@@ -189,14 +200,6 @@ scalingrpn = x,79,*,1000,/
 ; paramid    = 0xF40D
 ; databits   = 8
 ; scalingrpn = x
-
-; DID 0x032C | len 2 | Vehicle speed (vfzg_w) [km/h]
-paramname = vehicle_speed_kmh
-mode      = 0x22
-paramid   = 0x032C
-databits  = 16
-scalingrpn= x,128,/              ; phys = (512*int)/65536 = int/128
-; range: 0.00 – 511.99 km/h
 
 ; paramname = EGT_RH_degC
 ; mode = 0x22
@@ -287,18 +290,18 @@ scalingrpn= x,0.0234375,*,273.15,-   ; phys = 0.0234375*int - 273.15
 ; scalingrpn = x,0.00099999993,*
 
 
-paramname = BATT_mV
-mode = 0x22
-paramid = 0x0303
-databits = 16
-scalingrpn = x,0.05,/
+; paramname = BATT_mV
+; mode = 0x22
+; paramid = 0x0303
+; databits = 16
+; scalingrpn = x,0.05,/
 
 ; alternator set point
-paramname = ALT_SETP_mV
-mode = 0x22
-paramid = 0x032B
-databits = 16
-scalingrpn = x,0.05,/
+; paramname = ALT_SETP_mV
+; mode = 0x22
+; paramid = 0x032B
+; databits = 16
+; scalingrpn = x,0.05,/
 
 paramname = LH_INT_CAM_ACT_deg
 mode = 0x22
@@ -370,17 +373,18 @@ paramid   = 0x2F
 databits  = 8
 scalingrpn= x,100,*,255,/      ; % = A * 100 / 255
 
-paramname= ExhaustFlap_Pos
+paramname=ExhaustFlap_Pos
 mode=0x22
 paramid=0x043E
 databits=16
 scalingrpn=x,2,/
 
-paramname=OBDPID01
-mode=0x01
-paramid=0x01
-databits=8
-scalingrpn=x
+; I've seen this work but I'm not sure if it plays nice with the tactrix
+; paramname=OBDPID01
+; mode=0x01
+; paramid=0x01
+; databits=8
+; scalingrpn=x
 
 ; -----[ MODE 0x01 PARAMETERS ]-----
 
